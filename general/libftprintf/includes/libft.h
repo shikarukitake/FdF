@@ -6,7 +6,7 @@
 /*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 22:16:04 by sdagger           #+#    #+#             */
-/*   Updated: 2020/08/03 17:54:24 by sdagger          ###   ########.fr       */
+/*   Updated: 2020/08/04 18:51:38 by sdagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,6 @@ void			ft_error(void);
 void			ft_error_t(char const *text);
 void			to_free_dstr(char **s);
 int				word_counter(char const *str, char c);
+int				ft_printf(const char *fmt, ...);
 
 #endif
