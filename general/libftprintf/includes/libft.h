@@ -163,5 +163,6 @@ void			ft_error_t(char const *text);
 void			to_free_dstr(char **s);
 int				word_counter(char const *str, char c);
 int				ft_printf(const char *fmt, ...);
+int				ft_strisonlydigit(char *str);
 
 #endif

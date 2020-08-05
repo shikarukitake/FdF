@@ -6,6 +6,7 @@ LIBFT_A = libftprintf.a
 SR_LI_1 =	main.c \
 			read_file.c \
 			service.c \
+			draw.c \
 
 SOURCES_DIR = ./general/srcs/
 
@@ -19,9 +20,9 @@ HEADER_DIR = ./general/includes/
 # ft_printf
 #OBJECT_PF = ./ft_printf/objects
 #
-#LIB_MLX = minilibx/libmlx.a
-#LIBS_MLX = -L./ft_printf -lftprintf
-#MLX_DIR = ./minilibx
+LIB_MLX = minilibx/libmlx.a
+LIBS_MLX = -L./ft_printf -lftprintf
+MLX_DIR = ./minilibx
 
 COMPILER := gcc
 HDRPATH := ./general/includes -I./general/libftprintf/includes -I./minilibx
@@ -48,8 +49,8 @@ $(OBJECT_DIR_1)%.o : $(SOURCES_DIR)%.c $(HEADERS)
 $(LIBFT):
 	@make -C $(LIB_DIR)
 
-#$(LIB_MLX):
-#	@make -C $(MLX_DIR)
+$(LIB_MLX):
+	@make -C $(MLX_DIR)
 
 clean:
 	@rm -rf $(OBJECT_DIR_1)

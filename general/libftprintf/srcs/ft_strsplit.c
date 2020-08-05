@@ -56,7 +56,8 @@ void		to_free_dstr(char **s)
 	i = 0;
 	while (s[i])
 	{
-		free(s[i]);
+		if (s[i])
+			free(s[i]);
 		i++;
 	}
 	free(s);

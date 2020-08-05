@@ -6,7 +6,7 @@
 #    By: sdagger <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/25 14:21:49 by sdagger           #+#    #+#              #
-#    Updated: 2020/08/03 17:54:24 by sdagger          ###   ########.fr        #
+#    Updated: 2020/08/05 17:24:15 by sdagger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,6 +142,7 @@ SRC = exp_util.c            \
 		ft_strnequ.c \
 		ft_strsub_free.c \
 		ft_isalnum.c \
+		ft_strisonlydigit.c \
 
 SRCS = $(addprefix srcs/, $(SRC))
 

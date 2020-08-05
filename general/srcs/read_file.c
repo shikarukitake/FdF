@@ -30,19 +30,18 @@ void		set_width(char *f_name, t_fdf *fdf)
 	{
 		if (fdf->temp == NULL)
 		{
-			ft_printf("hello %d\n", fd);
 			error_f("set_width gnl malloc", 0);
 			close(fd);
 		}
 		if (fdf->width != 0 && word_counter(fdf->temp, ' ') != fdf->width)
 		{
-			ft_printf("hello %d\n", fd);
-			error_f("set_height", 0);
+			error_f("invalid map width", 0);
 			close(fd);
 		}
 		fdf->width = fdf->width == 0 ? word_counter(fdf->temp, ' ') : fdf->width;
 		free(fdf->temp);
 	}
+	fdf->temp = NULL;
 	close(fd);
 
 }
@@ -50,17 +49,24 @@ void		set_width(char *f_name, t_fdf *fdf)
 void		fill_z(char *line, t_fdf *fdf, int i)
 {
 	int		j;
+	long	n;
 
 	if (!(fdf->tempd = ft_strsplit(line, ' ')))
 		error_f("read_file fill_z ft_strsplit malloc", 0);
 	j = 0;
 	while(fdf->tempd[j])
 	{
-		fdf->z_matrix[i][j] = ft_atoi(fdf->tempd[j]);
-		free(fdf->tempd[j]);
+		if (ft_strlen(fdf->tempd[j]) > 11)
+			error_f("more than three character", 0);
+		if (!ft_strisonlydigit(fdf->tempd[j]))
+			error_f("Not only digit map", 0);
+		n = ft_atoi_l(fdf->tempd[j]);
+		if (n > FT_INT_MAX || n < FT_INT_MIN)
+			error_f("int overflow in map", 0);
+		fdf->z_matrix[i][j] = (int)n;
 		j++;
 	}
-	free(fdf->tempd);
+
 }
 
 void		read_file(t_fdf *fdf, char *f_name)
@@ -88,6 +94,7 @@ void		read_file(t_fdf *fdf, char *f_name)
 		free(fdf->temp);
 		i++;
 	}
+	fdf->temp = NULL;
 	close(fd);
 	fdf->z_matrix[i] = NULL;
 }
