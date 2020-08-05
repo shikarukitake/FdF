@@ -12,6 +12,6 @@ set(LIBFT_FILES ${LIBFT_FILES} ${LIBFT_ADD_FILES})
 add_library(ftprintf STATIC ${LIBFT_FILES})
 
 # FdF
-add_executable(FdF general/srcs/main.c general/includes/fdf.h general/srcs/service.c general/srcs/read_file.c)
+add_executable(FdF general/srcs/main.c general/includes/fdf.h general/srcs/service.c general/srcs/read_file.c general/srcs/draw.c)
 target_link_libraries(FdF ${PROJECT_BINARY_DIR}/libftprintf.a)
 add_dependencies(FdF ftprintf)

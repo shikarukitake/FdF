@@ -19,12 +19,12 @@ HEADER_DIR = ./general/includes/
 # ft_printf
 #OBJECT_PF = ./ft_printf/objects
 #
-#LIB_PF = ft_printf/libftprintf.a
-#LIBS_PF = -L./ft_printf -lftprintf
-# --------
+#LIB_MLX = minilibx/libmlx.a
+#LIBS_MLX = -L./ft_printf -lftprintf
+#MLX_DIR = ./minilibx
 
 COMPILER := gcc
-HDRPATH := ./general/includes -I./general/libftprintf/includes
+HDRPATH := ./general/includes -I./general/libftprintf/includes -I./minilibx
 IFLAGS := -I$(HDRPATH)
 CFLAGS := -Wall -Wextra -Werror
 
@@ -36,8 +36,8 @@ LIBS = -L./general/ft_libftprintf -l_ftprintf
 
 all: $(NAME_1)
 
-$(NAME_1): $(LIBFT) $(LIB_PF) $(OBJECT_DIR_1) $(OBJ_LI_1)
-	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIBS_PF) $(OBJ_LI_1) -o $(NAME_1)
+$(NAME_1): $(LIBFT) $(LIB_MLX) $(OBJECT_DIR_1) $(OBJ_LI_1)
+	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) -framework OpenGL -framework AppKit
 
 $(OBJECT_DIR_1):
 	@mkdir -p $(OBJECT_DIR_1)
@@ -47,6 +47,9 @@ $(OBJECT_DIR_1)%.o : $(SOURCES_DIR)%.c $(HEADERS)
 
 $(LIBFT):
 	@make -C $(LIB_DIR)
+
+#$(LIB_MLX):
+#	@make -C $(MLX_DIR)
 
 clean:
 	@rm -rf $(OBJECT_DIR_1)

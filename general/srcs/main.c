@@ -11,7 +11,6 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		ft_printf("HELLO");
 		return (0);
 	}
 
