@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 19:15:11 by sdagger           #+#    #+#             */
+/*   Updated: 2020/08/05 19:19:03 by sdagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 int	deal_key(int key, t_fdf *fdf)
@@ -16,18 +28,15 @@ int	deal_key(int key, t_fdf *fdf)
 			fdf->shift_x -= 30;
 		if (key == 124)
 			fdf->shift_x += 30;
-		ft_printf("s_x=%d | s_y=%d\n", fdf->shift_x, fdf->shift_y);
 		if (key == 8 || key == 91)
 			fdf->isometric = fdf->isometric == 0 ? 1 : 0;
 		if (key == 87)
 			fdf->zoom += 100;
 		if (key == 84)
 			fdf->zoom -= 100;
-		ft_printf("zoom=%d\n", fdf->zoom);
 		draw(fdf);
 		mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	}
-	ft_printf("%d ", key);
 	return (0);
 }
 
@@ -44,6 +53,10 @@ int	main(int ac, char **av)
 		draw(fdf);
 		mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 		mlx_loop(fdf->mlx_ptr);
+	}
+	else
+	{
+		ft_printf("usage: ./fdf 'mapfile'");
 	}
 	return (0);
 }

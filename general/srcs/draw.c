@@ -1,10 +1,16 @@
-#include "fdf.h"
-#include <math.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 19:15:18 by sdagger           #+#    #+#             */
+/*   Updated: 2020/08/05 19:49:14 by sdagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-float	mod(float n)
-{
-	return (n < 0 ? n * -1 : n);
-}
+#include "fdf.h"
 
 void	isometric(float *x, float *y, float z)
 {
@@ -12,85 +18,75 @@ void	isometric(float *x, float *y, float z)
 	*y = (*x + *y) * sin(0.8) - z;
 }
 
-void	bresenham(float x, float y, float x1, float y1, t_fdf *fdf)
+t_cord	get_step(t_cord cords, float x1, float y1)
 {
-	float	x_step;
-	float	y_step;
+	t_cord	step;
 	float	max;
+
+	step.x = x1 - cords.x;
+	step.y = y1 - cords.y;
+	max = mod(step.x) > mod(step.y) ? mod(step.x) : mod(step.y);
+	step.x /= max;
+	step.y /= max;
+	return (step);
+}
+
+void	put_pixel(t_cord cords, float x1, float y1, const t_fdf *fdf)
+{
+	t_cord	step;
+
+	step = get_step(cords, x1, y1);
+	while ((int)(x1 - cords.x) || (int)(y1 - cords.y))
+	{
+		if (cords.x > 1000 || cords.y > 1000 ||
+					cords.y < 0 || cords.x < 0)
+			break ;
+		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, cords.x, cords.y, fdf->color);
+		cords.x += step.x;
+		cords.y += step.y;
+	}
+}
+
+void	bresenham(t_cord cords, float x1, float y1, t_fdf *fdf)
+{
 	int		z;
 	int		z1;
 
-	z = fdf->z_matrix[(int)y][(int)x];
+	z = fdf->z_matrix[(int)cords.y][(int)cords.x];
 	z1 = fdf->z_matrix[(int)y1][(int)x1];
-//	ft_printf("before start bresenham\n\n");
-//	ft_printf("x=%f|y=%f\n", x, y);
-//	ft_printf("x1=%f|y1=%f\n", x, y);
-	// zoom
-	x *= fdf->zoom;
-	y *= fdf->zoom;
+	cords.x *= fdf->zoom;
+	cords.y *= fdf->zoom;
 	x1 *= fdf->zoom;
 	y1 *= fdf->zoom;
-
-//	ft_printf("setted zoom bresenham\n\n");
-//	ft_printf("x=%f|y=%f\n", x, y);
-//	ft_printf("x1=%f|y1=%f\n", x, y);
-	// color
-
 	fdf->color = (z || z1) ? RED : WHITE;
-//	ft_printf("color setted\n\n");
-
 	if (fdf->isometric)
 	{
-		isometric(&x, &y, z);
+		isometric(&cords.x, &cords.y, z);
 		isometric(&x1, &y1, z1);
 	}
-
-	x += fdf->shift_x;
-	y += fdf->shift_y;
+	cords.x += fdf->shift_x;
+	cords.y += fdf->shift_y;
 	x1 += fdf->shift_x;
 	y1 += fdf->shift_y;
-	out_of_bounds(&x, &y);
-	// step
-	x_step = x1 - x;
-	y_step = y1 - y;
-	max = mod(x_step) > mod(y_step) ? mod(x_step) : mod(y_step);
-	x_step /= max;
-	y_step /= max;
-//	ft_printf("start bresenham\n\n");
-	while ((int)(x1 - x) || (int)(y1 - y))
-	{
-//		ft_printf("x=%f|y=%f\n", x, y);
-//		ft_printf("x1=%f|y1=%f\n", x, y);
-		if (x > 1000 || y > 1000 || y < 0 || x < 0)
-			break ;
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, fdf->color);
-		x += x_step;
-		y += y_step;
-
-	}
-//	ft_printf("end bresenham\n\n\n");
+	put_pixel(cords, x1, y1, fdf);
 }
 
 void	draw(t_fdf *fdf)
 {
-	float	x;
-	float	y;
+	t_cord	cords;
 
-	y = 0;
-//	ft_printf("draw\n");
-//	ft_printf("%d %d\n", fdf->height, fdf->width);
-	while (y < fdf->height)
+	cords.y = 0;
+	while (cords.y < fdf->height)
 	{
-		x = 0;
-		while (x < fdf->width)
+		cords.x = 0;
+		while (cords.x < fdf->width)
 		{
-			if (x < fdf->width - 1)
-				bresenham(x, y, x + 1, y, fdf);
-			if (y < fdf->height - 1)
-				bresenham(x, y, x, y + 1, fdf);
-			x++;
+			if (cords.x < fdf->width - 1)
+				bresenham(cords, cords.x + 1, cords.y, fdf);
+			if (cords.y < fdf->height - 1)
+				bresenham(cords, cords.x, cords.y + 1, fdf);
+			cords.x++;
 		}
-		y++;
-		ft_printf("endofiter\n\n\n");
+		cords.y++;
 	}
 }

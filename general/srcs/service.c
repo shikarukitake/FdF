@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   service.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 19:14:57 by sdagger           #+#    #+#             */
+/*   Updated: 2020/08/05 19:36:45 by sdagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	free_fdf(t_fdf *fdf)
@@ -11,7 +23,6 @@ void	free_fdf(t_fdf *fdf)
 	if (fdf->tempd)
 		to_free_dstr(fdf->tempd);
 	i = 0;
-
 	if (fdf->z_matrix)
 	{
 		while (i != fdf->height)
@@ -61,4 +72,9 @@ void	end(t_fdf *fdf)
 {
 	free_fdf(fdf);
 	exit(0);
+}
+
+float	mod(float n)
+{
+	return (n < 0 ? n * -1 : n);
 }

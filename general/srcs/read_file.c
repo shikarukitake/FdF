@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 19:15:05 by sdagger           #+#    #+#             */
+/*   Updated: 2020/08/05 19:52:13 by sdagger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void		set_height(char *f_name, t_fdf *fdf)
@@ -38,12 +50,12 @@ void		set_width(char *f_name, t_fdf *fdf)
 			error_f("invalid map width", 0);
 			close(fd);
 		}
-		fdf->width = fdf->width == 0 ? word_counter(fdf->temp, ' ') : fdf->width;
+		fdf->width = fdf->width == 0 ?
+				word_counter(fdf->temp, ' ') : fdf->width;
 		free(fdf->temp);
 	}
 	fdf->temp = NULL;
 	close(fd);
-
 }
 
 void		fill_z(char *line, t_fdf *fdf, int i)
@@ -54,7 +66,7 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 	if (!(fdf->tempd = ft_strsplit(line, ' ')))
 		error_f("read_file fill_z ft_strsplit malloc", 0);
 	j = 0;
-	while(fdf->tempd[j])
+	while (fdf->tempd[j])
 	{
 		if (ft_strlen(fdf->tempd[j]) > 11)
 			error_f("more than three character", 0);
@@ -66,7 +78,22 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 		fdf->z_matrix[i][j] = (int)n;
 		j++;
 	}
+}
 
+void		fill_zmat(t_fdf *fdf, int i, int fd)
+{
+	i = 0;
+	while (ft_get_next_line(fd, &fdf->temp))
+	{
+		if (!fdf->temp)
+			error_f("read_file gnl malloc", 0);
+		fill_z(fdf->temp, fdf, i);
+		free(fdf->temp);
+		i++;
+	}
+	fdf->temp = NULL;
+	close(fd);
+	fdf->z_matrix[i] = NULL;
 }
 
 void		read_file(t_fdf *fdf, char *f_name)
@@ -85,16 +112,5 @@ void		read_file(t_fdf *fdf, char *f_name)
 			error_f("z_matrix malloc", 0);
 	if (!(fd = open(f_name, O_RDONLY, 0)))
 		error_f("read_file open file error", 0);
-	i = 0;
-	while (ft_get_next_line(fd, &fdf->temp))
-	{
-		if (!fdf->temp)
-			error_f("read_file gnl malloc", 0);
-		fill_z(fdf->temp, fdf, i);
-		free(fdf->temp);
-		i++;
-	}
-	fdf->temp = NULL;
-	close(fd);
-	fdf->z_matrix[i] = NULL;
+	fill_zmat(fdf, i, fd);
 }
