@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void		set_width(char *f_name, t_fdf *fdf)
+void		set_height(char *f_name, t_fdf *fdf)
 {
 	int	fd;
 
@@ -18,9 +18,10 @@ void		set_width(char *f_name, t_fdf *fdf)
 	close(fd);
 }
 
-void		set_height(char *f_name, t_fdf *fdf)
+void		set_width(char *f_name, t_fdf *fdf)
 {
-	int fd;
+	int	fd;
+
 	fd = open(f_name, O_RDONLY, 0);
 	if (fd < 0)
 		error_f("set_width file open error", 0);
@@ -28,13 +29,22 @@ void		set_height(char *f_name, t_fdf *fdf)
 	while (ft_get_next_line(fd, &fdf->temp))
 	{
 		if (fdf->temp == NULL)
+		{
+			ft_printf("hello %d\n", fd);
 			error_f("set_width gnl malloc", 0);
+			close(fd);
+		}
 		if (fdf->width != 0 && word_counter(fdf->temp, ' ') != fdf->width)
+		{
+			ft_printf("hello %d\n", fd);
 			error_f("set_height", 0);
+			close(fd);
+		}
 		fdf->width = fdf->width == 0 ? word_counter(fdf->temp, ' ') : fdf->width;
 		free(fdf->temp);
 	}
 	close(fd);
+
 }
 
 void		fill_z(char *line, t_fdf *fdf, int i)

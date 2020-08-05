@@ -6,7 +6,7 @@
 /*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 19:03:26 by sdagger           #+#    #+#             */
-/*   Updated: 2020/08/04 19:32:32 by sdagger          ###   ########.fr       */
+/*   Updated: 2020/08/05 11:31:16 by sdagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_line_maker(const int fd, char **help, char **line)
 int			ft_get_next_line(const int fd, char **line)
 {
 	static char	*help[1];
-	char		buff[32];
+	char		buff[32 + 1];
 	char		*iter;
 	int			rdr;
 
@@ -51,7 +51,9 @@ int			ft_get_next_line(const int fd, char **line)
 		buff[rdr] = '\0';
 		if (help[fd] == NULL)
 			help[fd] = ft_strnew(1);
-		help[fd] = ft_strjoin_free(help[fd], buff, 1);
+		iter = ft_strjoin(help[fd], buff);
+		free(help[fd]);
+		help[fd] = iter;
 		if (ft_strchr(help[fd], '\n'))
 			break ;
 	}
