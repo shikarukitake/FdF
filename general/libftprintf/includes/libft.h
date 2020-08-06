@@ -24,8 +24,6 @@
 # endif
 
 # define BUFF_SIZE 512
-# define AND &&
-# define OR ||
 
 # define FT_INT_MIN -2147483648l
 # define FT_INT_MIN_STR "-2147483648"
@@ -130,6 +128,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+void			ft_fuldel(char ***str, size_t len);
 
 typedef struct	s_list
 {

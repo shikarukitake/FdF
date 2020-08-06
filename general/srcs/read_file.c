@@ -68,8 +68,6 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 	j = 0;
 	while (fdf->tempd[j])
 	{
-//		if (ft_strlen(fdf->tempd[j]) > 11)
-//			error_f("more than three character", 0);
 		n = ft_atoi_l(fdf->tempd[j]);
 		if (n > FT_INT_MAX || n < FT_INT_MIN)
 			error_f("int overflow in map", 0);
@@ -81,7 +79,6 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 void		fill_zmat(t_fdf *fdf, int i, int fd)
 {
 	i = 0;
-
 	while (ft_get_next_line(fd, &fdf->temp))
 	{
 		if (!fdf->temp)
@@ -90,7 +87,6 @@ void		fill_zmat(t_fdf *fdf, int i, int fd)
 		free(fdf->temp);
 		i++;
 	}
-
 	fdf->temp = NULL;
 	close(fd);
 	fdf->z_matrix[i] = NULL;
@@ -107,11 +103,9 @@ void		read_file(t_fdf *fdf, char *f_name)
 	fdf->z_matrix = malloc(sizeof(int*) * (fdf->height + 1));
 	if (fdf->z_matrix == NULL)
 		error_f("z_matrix malloc", 0);
-
 	while (i <= fdf->height)
 		if (!(fdf->z_matrix[i++] = malloc(sizeof(int) * (fdf->width + 1))))
 			error_f("z_matrix malloc", 0);
-
 	if (!(fd = open(f_name, O_RDONLY, 0)))
 		error_f("read_file open file error", 0);
 	fill_zmat(fdf, i, fd);

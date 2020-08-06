@@ -23,6 +23,7 @@ HEADER_DIR = ./general/includes/
 LIB_MLX = minilibx/libmlx.a
 LIBS_MLX = -L./ft_printf -lftprintf
 MLX_DIR = ./minilibx
+MKX_FLAGS = -framework OpenGL -framework AppKit
 
 COMPILER := gcc
 HDRPATH := ./general/includes -I./general/libftprintf/includes -I./minilibx
@@ -38,7 +39,7 @@ LIBS = -L./general/ft_libftprintf -l_ftprintf
 all: $(NAME_1)
 
 $(NAME_1): $(LIBFT) $(LIB_MLX) $(OBJECT_DIR_1) $(OBJ_LI_1)
-	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) -framework OpenGL -framework AppKit
+	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) $(MLX_FLAGS)
 
 $(OBJECT_DIR_1):
 	@mkdir -p $(OBJECT_DIR_1)
@@ -55,12 +56,10 @@ $(LIB_MLX):
 clean:
 	@rm -rf $(OBJECT_DIR_1)
 	@make -C $(LIB_DIR) clean
-#	@make -C ./ft_printf clean
 	@rm -rf $(OBJECT_PF)
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean
-#	@make -C ./ft_printf fclean
 	@/bin/rm -f $(NAME_1)
 
 re: fclean all

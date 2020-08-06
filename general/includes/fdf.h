@@ -17,6 +17,11 @@
 # include <mlx.h>
 # include <math.h>
 
+# define MENU_WIDTH			250
+# define WIDTH				1000
+# define HEIGHT				1000
+# define BACKGROUND			0x222222
+# define MENU_BACKGROUND	0x1E1E1E
 # define RED				0xe80c0c
 # define WHITE				0xffffff
 # define TEXT_COLOR			0xEAEAEA
@@ -30,11 +35,16 @@ typedef struct	s_fdf
 	char	**tempd;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img;
 	int		zoom;
 	int		color;
 	int		shift_y;
 	int		shift_x;
 	int		isometric;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*data_addr;
 }				t_fdf;
 
 typedef struct	s_cord

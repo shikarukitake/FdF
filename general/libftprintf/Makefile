@@ -156,7 +156,7 @@ $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I$(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I$(INC) -c -o $< $@ 
 
 clean:
 	@rm -f $(OBJ)
