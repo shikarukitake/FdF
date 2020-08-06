@@ -17,8 +17,9 @@
 # include <mlx.h>
 # include <math.h>
 
-# define RED 0xe80c0c
-# define WHITE 0xffffff
+# define RED				0xe80c0c
+# define WHITE				0xffffff
+# define TEXT_COLOR			0xEAEAEA
 
 typedef struct	s_fdf
 {

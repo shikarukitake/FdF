@@ -74,6 +74,21 @@ void	bresenham(t_cord cords, float x1, float y1, t_fdf *fdf)
 	put_pixel(cords, x1, y1, fdf);
 }
 
+void	print_menu(t_fdf *fdf)
+{
+	int		y;
+	void	*mlx;
+	void	*win;
+
+	y = 0;
+	mlx = fdf->mlx_ptr;
+	win = fdf->win_ptr;
+	mlx_string_put(mlx, win, 15, y += 20, TEXT_COLOR, "How to Use");
+	mlx_string_put(mlx, win, 15, y += 35, TEXT_COLOR, "Zoom: 5/2");
+	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Move: Arrows");
+	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Projection: C/8");
+}
+
 void	draw(t_fdf *fdf)
 {
 	t_cord	cords;
@@ -92,4 +107,5 @@ void	draw(t_fdf *fdf)
 		}
 		cords.y++;
 	}
+	print_menu(fdf);
 }
