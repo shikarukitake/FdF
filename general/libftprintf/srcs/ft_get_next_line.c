@@ -6,7 +6,7 @@
 /*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 19:03:26 by sdagger           #+#    #+#             */
-/*   Updated: 2020/08/05 11:31:16 by sdagger          ###   ########.fr       */
+/*   Updated: 2020/08/05 21:39:57 by sdagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static int	ft_line_maker(const int fd, char **help, char **line)
 int			ft_get_next_line(const int fd, char **line)
 {
 	static char	*help[1];
-	char		buff[32 + 1];
+	char		buff[BUFF_SIZE + 1];
 	char		*iter;
 	int			rdr;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((rdr = read(fd, buff, 32)) > 0)
+	while ((rdr = read(fd, buff, BUFF_SIZE + 1)) > 0)
 	{
 		buff[rdr] = '\0';
 		if (help[fd] == NULL)

@@ -45,7 +45,7 @@ t_fdf	*init_fdf(void)
 	fdf->z_matrix = NULL;
 	fdf->tempd = NULL;
 	fdf->temp = NULL;
-	fdf->zoom = 20;
+	fdf->zoom = 2;
 	fdf->shift_x = 300;
 	fdf->shift_y = 300;
 	fdf->isometric = 1;

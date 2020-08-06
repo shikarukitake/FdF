@@ -55,6 +55,24 @@ int					ft_atoi(const char *str)
 	return (q);
 }
 
+static long			make_int_l(const char *str, long long q, int i, int neg)
+{
+	int	j;
+
+	j = 0;
+	while (str[i] >= '0' && (str[i] <= '9'))
+	{
+		q = q * 10 + (str[i] - '0');
+		i++;
+		j++;
+	}
+	if (j >= 14)
+		return (2147483650);
+	else
+		return (q * neg);
+	return (q);
+}
+
 long				ft_atoi_l(const char *str)
 {
 	long long	q;
@@ -69,9 +87,9 @@ long				ft_atoi_l(const char *str)
 	{
 		neg = str[i] == '-' ? -1 : 1;
 		i++;
-		q = make_int(str, q, i, neg);
+		q = make_int_l(str, q, i, neg);
 	}
 	else
-		q = make_int(str, q, i, 1);
+		q = make_int_l(str, q, i, 1);
 	return (q);
 }

@@ -6,7 +6,7 @@
 /*   By: sdagger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 19:15:11 by sdagger           #+#    #+#             */
-/*   Updated: 2020/08/05 19:19:03 by sdagger          ###   ########.fr       */
+/*   Updated: 2020/08/05 21:21:49 by sdagger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,35 @@ int	deal_key(int key, t_fdf *fdf)
 		if (key == 8 || key == 91)
 			fdf->isometric = fdf->isometric == 0 ? 1 : 0;
 		if (key == 87)
-			fdf->zoom += 100;
+			fdf->zoom += 1;
 		if (key == 84)
-			fdf->zoom -= 100;
-		draw(fdf);
+			if (fdf->zoom > 1)
+				fdf->zoom -= 1;
 		mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+		draw(fdf);
+	
 	}
 	return (0);
+}
+
+void	map_zoom(t_fdf *fdf)
+{
+	if (fdf->height * fdf->width <= 100)
+		fdf->zoom = 30;
+	else if (fdf->height * fdf->width <= 250)
+		fdf->zoom = 20;
+	else if (fdf->height * fdf->width <= 500)
+		fdf->zoom = 15;
+	else if (fdf->height * fdf->width <= 1000)
+		fdf->zoom = 10;
+	else if (fdf->height * fdf->width <= 25000)
+		fdf->zoom = 5;
+	else if (fdf->height * fdf->width <= 100000)
+		fdf->zoom = 4;
+	else if (fdf->height * fdf->width <= 200000)
+		fdf->zoom = 3;
+	else if (fdf->height * fdf->width <= 300000)
+		fdf->zoom = 2;
 }
 
 int	main(int ac, char **av)
@@ -50,13 +72,14 @@ int	main(int ac, char **av)
 		read_file(fdf, av[1]);
 		fdf->mlx_ptr = mlx_init();
 		fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, 1000, 1000, "FDF");
+		map_zoom(fdf);
 		draw(fdf);
 		mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 		mlx_loop(fdf->mlx_ptr);
 	}
 	else
 	{
-		ft_printf("usage: ./fdf 'mapfile'");
+		ft_printf("Usage : ./fdf_original <filename>\n");
 	}
 	return (0);
 }

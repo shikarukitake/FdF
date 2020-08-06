@@ -23,7 +23,7 @@
 #  define OPEN_MAX 1024
 # endif
 
-# define BUFF_SIZE 64
+# define BUFF_SIZE 512
 # define AND &&
 # define OR ||
 
