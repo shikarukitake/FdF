@@ -63,6 +63,7 @@ t_fdf			*error_f(char const *text, int init);
 ** reading map and check on errors
 */
 
+void			check_values(char **split);
 void			read_file(t_fdf *fdf, char *f_name);
 
 /*

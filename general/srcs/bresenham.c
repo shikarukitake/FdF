@@ -51,11 +51,8 @@ void		put_pixel(t_cord cords, float x1, float y1, t_fdf *fdf)
 	t_cord	step;
 
 	step = get_step(cords, x1, y1);
-	while ((int)(cords.x - x1) || (int)(cords.y - y1))
+	while ((int)(x1 - cords.x) || (int)(y1 - cords.y))
 	{
-		if (cords.x > 1300 || cords.y > 1300 ||
-					cords.y < -300 || cords.x < -300)
-			break ;
 		my_put_pixel(fdf, cords.x, cords.y, 16777215);
 		cords.x += step.x;
 		cords.y += step.y;

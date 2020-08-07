@@ -7,6 +7,8 @@ SR_LI_1 =	main.c \
 			read_file.c \
 			service.c \
 			draw.c \
+			bresenham.c \
+			check.c \
 
 SOURCES_DIR = ./general/srcs/
 
@@ -23,7 +25,6 @@ HEADER_DIR = ./general/includes/
 LIB_MLX = minilibx/libmlx.a
 LIBS_MLX = -L./ft_printf -lftprintf
 MLX_DIR = ./minilibx
-MKX_FLAGS = -framework OpenGL -framework AppKit
 
 COMPILER := gcc
 HDRPATH := ./general/includes -I./general/libftprintf/includes -I./minilibx
@@ -39,7 +40,7 @@ LIBS = -L./general/ft_libftprintf -l_ftprintf
 all: $(NAME_1)
 
 $(NAME_1): $(LIBFT) $(LIB_MLX) $(OBJECT_DIR_1) $(OBJ_LI_1)
-	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) $(MLX_FLAGS)
+	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) -framework OpenGL -framework AppKit
 
 $(OBJECT_DIR_1):
 	@mkdir -p $(OBJECT_DIR_1)
@@ -57,6 +58,7 @@ clean:
 	@rm -rf $(OBJECT_DIR_1)
 	@make -C $(LIB_DIR) clean
 	@rm -rf $(OBJECT_PF)
+	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean

@@ -65,6 +65,7 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 
 	if (!(fdf->tempd = ft_strsplit(line, ' ')))
 		error_f("read_file fill_z ft_strsplit malloc", 0);
+	check_values(fdf->tempd);
 	j = 0;
 	while (fdf->tempd[j])
 	{

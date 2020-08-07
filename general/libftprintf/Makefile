@@ -143,6 +143,7 @@ SRC = exp_util.c            \
 		ft_strsub_free.c \
 		ft_isalnum.c \
 		ft_strisonlydigit.c \
+		ft_w.c \
 
 SRCS = $(addprefix srcs/, $(SRC))
 
