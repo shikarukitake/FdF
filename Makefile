@@ -1,6 +1,6 @@
 NAME_1 = fdf
 
-NAME_2 = push_swap
+NAME_2 = fdf_debug
 LIBFT_A = libftprintf.a
 
 SR_LI_1 =	main.c \
@@ -29,7 +29,7 @@ MLX_DIR = ./minilibx
 COMPILER := gcc
 HDRPATH := ./general/includes -I./general/libftprintf/includes -I./minilibx
 IFLAGS := -I$(HDRPATH)
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 
 LIB_DIR = ./general/libftprintf
 

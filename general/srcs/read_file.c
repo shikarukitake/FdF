@@ -75,6 +75,11 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 		fdf->z_matrix[i][j] = (int)n;
 		j++;
 	}
+	if (fdf->tempd)
+	{	
+		to_free_dstr(fdf->tempd);
+		fdf->tempd = NULL;
+	}
 }
 
 void		fill_zmat(t_fdf *fdf, int i, int fd)
@@ -90,7 +95,6 @@ void		fill_zmat(t_fdf *fdf, int i, int fd)
 	}
 	fdf->temp = NULL;
 	close(fd);
-	fdf->z_matrix[i] = NULL;
 }
 
 void		read_file(t_fdf *fdf, char *f_name)

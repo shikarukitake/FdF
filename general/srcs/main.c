@@ -86,6 +86,8 @@ int		main(int ac, char **av)
 		draw(fdf);
 		mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 		mlx_loop(fdf->mlx_ptr);
+		if (fdf)
+			free_fdf(fdf);
 	}
 	else
 		ft_printf("Usage : ./fdf_original <filename>\n");

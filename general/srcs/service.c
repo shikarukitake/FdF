@@ -25,10 +25,10 @@ void	free_fdf(t_fdf *fdf)
 	i = 0;
 	if (fdf->z_matrix)
 	{
-		while (i != fdf->height)
+		while (i <= fdf->height)
 		{
-			if (fdf->z_matrix[i])
-				free(fdf->z_matrix[i]);
+			free(fdf->z_matrix[i]);
+			fdf->z_matrix[i] = NULL;
 			i++;
 		}
 		free(fdf->z_matrix);

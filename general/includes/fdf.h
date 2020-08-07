@@ -82,6 +82,7 @@ void			draw(t_fdf *fdf);
 ** Service functions
 */
 
+void			free_fdf(t_fdf *fdf);
 void			end(t_fdf *fdf);
 float			mod(float n);
 #endif

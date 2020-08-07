@@ -16,7 +16,7 @@ LIBFT_DIR = libft
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -g
 
 SRC = exp_util.c            \
       color_util.c          \
