@@ -1,6 +1,8 @@
 # FdF
 This project is about creating a simplified 3D graphic representation of a relief landscape.
 
+![Example of fdf](https://github.com/shikarukitake/FdF/blob/master/images/example.png)
+
 # How to run
 You can compile whole project with
 ```
@@ -10,5 +12,5 @@ Or you can open project with CLion and load CMake Project
 
 # Resources
 ```
-https://vk.com/away.php?to=https%3A%2F%2Fyoutu.be%2F10P59aOgi68&cc_key=
+https://youtu.be/10P59aOgi68
 ```
