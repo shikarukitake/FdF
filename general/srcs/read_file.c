@@ -76,7 +76,7 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 		j++;
 	}
 	if (fdf->tempd)
-	{	
+	{
 		to_free_dstr(fdf->tempd);
 		fdf->tempd = NULL;
 	}

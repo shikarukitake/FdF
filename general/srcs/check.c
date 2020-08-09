@@ -31,7 +31,7 @@ int		is_x(int c)
 	return (c == 'x' || c == 'X');
 }
 
-t_ull			check_hexad(t_ull i, t_ull j, char **split)
+t_ull	check_hexad(t_ull i, t_ull j, char **split)
 {
 	t_ull letters_count;
 
@@ -48,7 +48,7 @@ t_ull			check_hexad(t_ull i, t_ull j, char **split)
 	return (1);
 }
 
-void		check_values(char **split)
+void	check_values(char **split)
 {
 	t_ull i;
 	t_ull j;
