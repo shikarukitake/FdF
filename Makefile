@@ -32,12 +32,16 @@ IFLAGS := -I$(HDRPATH)
 CFLAGS := -Wall -Wextra -Werror -g
 
 LIB_DIR = ./general/libftprintf
+LIB_RULE = $(addsuffix .lib, $(LIB_DIR))
 
 LIBFT = ./general/libftprintf/libftprintf.a
 LIBS = -L./general/ft_libftprintf -l_ftprintf
 
 
-all: $(NAME_1)
+all: $(LIB_RULE) $(NAME_1)
+
+%.lib:
+	@$(MAKE) -sC $(LIB_DIR)
 
 $(NAME_1): $(LIBFT) $(LIB_MLX) $(OBJECT_DIR_1) $(OBJ_LI_1)
 	@$(COMPILER) $(CFLAGS) $(IFLAGS) $(LIBFT) $(LIB_MLX) $(OBJ_LI_1) -o $(NAME_1) -framework OpenGL -framework AppKit

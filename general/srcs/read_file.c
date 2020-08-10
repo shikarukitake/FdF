@@ -70,8 +70,8 @@ void		fill_z(char *line, t_fdf *fdf, int i)
 	while (fdf->tempd[j])
 	{
 		n = ft_atoi_l(fdf->tempd[j]);
-		if (n > FT_INT_MAX || n < FT_INT_MIN)
-			error_f("int overflow in map", 0);
+		if (n > 2000 || n < -2000)
+			error_f("big value of Z in map", 0);
 		fdf->z_matrix[i][j] = (int)n;
 		j++;
 	}
